@@ -24,13 +24,13 @@ const showAI = (tools) =>{
                             <li>3. ${tool.features[2] ? tool.features[2] : 'Null'}</li> 
                         </ol>  
                 </div>
-                <div class="pt-5 flex justify-between">
+                <div class="pt-5 flex justify-between items-center">
                     <div>
                         <h1 class="pl-7 text-xl font-medium">${tool.name}</h1>
                         <input class="ml-7 mt-3 mb-7" type="date" value="2022-01-11" />
                     </div>
                     <div>
-                        <button class="mt-5 mr-5 text-white px-4 py-4 rounded-xl text-xl font-medium bg-red-100"></button>
+                        <button class="mr-5 px-2 py-1  text-red-400 rounded-full text-xl font-medium bg-red-100"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
         </div>`

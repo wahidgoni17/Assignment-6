@@ -84,7 +84,30 @@ const displayAiDetails = data =>{
                 <h5 class="text-danger fw-bold">${data.pricing[2].price}</h5>
                 <h5 class="text-danger fw-bold">${data.pricing[2].plan}</h5>
             </div>
+        </div>
+        <div class="d-flex my-4 justify-content-around">
+            <div>
+                <h3>Features</h3>
+                <ul>
+                    <li>${data.features["1"].feature_name}</li>
+                    <li>${data.features["2"].feature_name}</li>
+                    <li>${data.features["3"].feature_name}</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Integrations</h3>
+                <ul>
+                    <li>${data.integrations[0]}</li>
+                    <li>${data.integrations[1]}</li>
+                    <li>${data.integrations[2] ? data.integrations[2] : "no data found"}</li>
+                </ul>
+            </div>
         </div> 
+    </div>
+    <div class="w-50 border border-light-subtle rounded">
+        <div>
+        <img src="${data.image_link[0]}" class="h-50 w-100 p-3">
+        </div>
     </div>
     `
 }

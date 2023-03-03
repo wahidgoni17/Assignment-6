@@ -3,13 +3,13 @@ const loadAi = async() =>{
     const res = await fetch(aiURL);
     const data = await res.json();
     showAI(data.data.tools.slice(0,6))
-    console.log(data.data.tools)
+    // console.log(data.data.tools)
 }
 const showAI = (tools) =>{
     const aiContainer = document.getElementById('ai-container')
     aiContainer.textContent = ' '
     tools.forEach(tool => {
-        console.log(tool)
+        // console.log(tool)
         const aiDiv = document.createElement('div')
          aiDiv.classList.add('col')
         aiDiv.innerHTML = `
@@ -30,7 +30,7 @@ const showAI = (tools) =>{
                         <input class="ms-2 border border-0 mt-3 mb-7" type="date" value="2022-01-11" />
                     </div>
                     <div>
-                        <button data-bs-toggle="modal"
+                        <button onclick="loadAiDetails('${tool.id}')" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" class="me-2 border border-0 rounded-circle px-2 py-1  text-danger  text-xl font-medium bg-danger-subtle"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
@@ -58,5 +58,36 @@ const showAllDataTogether = async() => {
     const showbtndiv = document.getElementById('show-btn-div')
     showbtndiv.classList.add('d-none')
   };
+//----------AI details----------//
+const loadAiDetails = async(id) =>{
+    const aidetailsURL = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+    const res = await fetch(aidetailsURL)
+    const data = await res.json()
+    displayAiDetails(data.data)
+}
+const displayAiDetails = data =>{
+    console.log(data)
+    const aidetailsDiv = document.getElementById('ai-details')
+    aidetailsDiv.innerHTML=`
+    <div class="bg-danger-subtle border border-danger border-2 rounded w-50">
+        <h2 class="ps-3 pt-3">${data.description}</h2>
+        <div class="d-flex px-3 justify-content-around">
+            <div class="bg-light rounded text-center pt-2 p-2">
+                <h5 class="text-success fw-bold">${data.pricing[0].price}</h5>
+                <h5 class="text-success fw-bold">${data.pricing[0].plan}</h5>
+            </div>
+            <div class="bg-light rounded text-center p-2">
+                <h5 class="text-warning fw-bold">${data.pricing[1].price}</h5>
+                <h5 class="text-warning fw-bold">${data.pricing[1].plan}</h5>
+            </div>
+            <div class="bg-light rounded w-25 text-center p-2">
+                <h5 class="text-danger fw-bold">${data.pricing[2].price}</h5>
+                <h5 class="text-danger fw-bold">${data.pricing[2].plan}</h5>
+            </div>
+        </div> 
+    </div>
+    `
+}
+
 
 loadAi()

@@ -73,7 +73,7 @@ const displayAiDetails = data =>{
         <h2 class="ps-3 pt-3">${data.description}</h2>
         <div class="d-flex px-3 justify-content-around">
             <div class="bg-light rounded text-center pt-2 p-2">
-                <h5 class="text-success fw-bold">${data.pricing[0].price}</h5>
+                <h5 class="text-success fw-bold">${data.pricing[0] ? data.pricing[0].price : 'free of cost'}</h5>
                 <h5 class="text-success fw-bold">${data.pricing[0].plan}</h5>
             </div>
             <div class="bg-light rounded text-center p-2">
@@ -105,8 +105,14 @@ const displayAiDetails = data =>{
         </div> 
     </div>
     <div class="w-50 border border-light-subtle rounded">
-        <div>
-        <img src="${data.image_link[0]}" class="h-50 w-100 p-3">
+        <div class="position-relative">
+            <img src="${data.image_link[0]}" class="h-50 w-100 p-3">
+            <button
+            class="border border-0 fs-5 text-white px-3 py-1 rounded font-medium position-absolute top-0 start-50 translate-middle bg-danger">${data.accuracy.score *100}% Accuracy</button>
+        </div>
+        <div class="text-center mx-2">
+            <h3 class="fw-bold">${data.input_output_examples[0].input}</h3>
+            <h5>${data.input_output_examples[0].output}</h5>
         </div>
     </div>
     `

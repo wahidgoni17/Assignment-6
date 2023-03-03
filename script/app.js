@@ -3,7 +3,7 @@ const loadAi = async() =>{
     const res = await fetch(aiURL);
     const data = await res.json();
     showAI(data.data.tools.slice(0,6))
-    // console.log(data.data.tools)
+    console.log(data.data.tools)
 }
 const showAI = (tools) =>{
     const aiContainer = document.getElementById('ai-container')
@@ -70,19 +70,19 @@ const displayAiDetails = data =>{
     const aidetailsDiv = document.getElementById('ai-details')
     aidetailsDiv.innerHTML=`
     <div class="bg-danger-subtle border border-danger border-2 rounded w-50">
-        <h2 class="ps-3 pt-3">${data.description}</h2>
+        <h2 class="ps-3 pt-3">${data.description ? data.description : "no description found"}</h2>
         <div class="d-flex px-3 justify-content-around">
             <div class="bg-light rounded text-center pt-2 p-2">
-                <h5 class="text-success fw-bold">${data.pricing[0] ? data.pricing[0].price : 'free of cost'}</h5>
-                <h5 class="text-success fw-bold">${data.pricing[0].plan}</h5>
+                <h5 class="text-success fw-bold">${data.pricing ? data.pricing[0].price : 'free of cost'}</h5>
+                <h5 class="text-success fw-bold">${data.pricing ? data.pricing[0].plan : 'Basic'}</h5>
             </div>
             <div class="bg-light rounded text-center p-2">
-                <h5 class="text-warning fw-bold">${data.pricing[1].price}</h5>
-                <h5 class="text-warning fw-bold">${data.pricing[1].plan}</h5>
+                <h5 class="text-warning fw-bold">${data.pricing ? data.pricing[1].price : 'free of cost'}</h5>
+                <h5 class="text-warning fw-bold">${data.pricing ? data.pricing[1].plan : 'Pro'}</h5>
             </div>
             <div class="bg-light rounded w-25 text-center p-2">
-                <h5 class="text-danger fw-bold">${data.pricing[2].price}</h5>
-                <h5 class="text-danger fw-bold">${data.pricing[2].plan}</h5>
+                <h5 class="text-danger fw-bold">${data.pricing ? data.pricing[2].price : 'free of cost'}</h5>
+                <h5 class="text-danger fw-bold">${data.pricing ? data.pricing[2].plan : 'Enterprise'}</h5>
             </div>
         </div>
         <div class="d-flex my-4 justify-content-around">
@@ -97,22 +97,22 @@ const displayAiDetails = data =>{
             <div>
                 <h3>Integrations</h3>
                 <ul>
-                    <li>${data.integrations[0]}</li>
-                    <li>${data.integrations[1]}</li>
-                    <li>${data.integrations[2] ? data.integrations[2] : "no data found"}</li>
+                    <li>${data.integrations ? data.integrations[0] : "no data found"}</li>
+                    <li>${data.integrations ? data.integrations[1] : " "}</li>
+                    <li>${data.integrations ? data.integrations[2] : " "}</li>
                 </ul>
             </div>
         </div> 
     </div>
     <div class="w-50 border border-light-subtle rounded">
         <div class="position-relative">
-            <img src="${data.image_link[0]}" class="h-50 w-100 p-3">
+            <img src="${data.image_link ? data.image_link[0] : data.logo}" class="h-50 w-100 p-3">
             <button
-            class="border border-0 fs-5 text-white px-3 py-1 rounded font-medium position-absolute top-0 start-50 translate-middle bg-danger">${data.accuracy.score *100}% Accuracy</button>
+            class="border border-0 fs-5 text-white px-3 py-1 rounded font-medium position-absolute top-0 start-50 translate-middle bg-danger">${data.accuracy.score*100}% Accuracy</button>
         </div>
         <div class="text-center mx-2">
-            <h3 class="fw-bold">${data.input_output_examples[0].input}</h3>
-            <h5>${data.input_output_examples[0].output}</h5>
+            <h3 class="fw-bold">${data.input_output_examples ? data.input_output_examples[0].input : "Can you give any example?"}</h3>
+            <h5>${data.input_output_examples ? data.input_output_examples[0].output : "No! Not Yet! Take a break!!!"}</h5>
         </div>
     </div>
     `

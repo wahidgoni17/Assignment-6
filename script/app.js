@@ -30,19 +30,33 @@ const showAI = (tools) =>{
                         <input class="ms-2 border border-0 mt-3 mb-7" type="date" value="2022-01-11" />
                     </div>
                     <div>
-                        <button class="me-2 border border-0 rounded-circle px-2 py-1  text-danger  text-xl font-medium bg-danger-subtle"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" class="me-2 border border-0 rounded-circle px-2 py-1  text-danger  text-xl font-medium bg-danger-subtle"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
         </div>`
         aiContainer.appendChild(aiDiv)
-    });  
+    }); 
+    // toggleSpinner(false)
 }
+// loading section
+// const toggleSpinner = isLoading => {
+//     const loaderSection = document.getElementById('loader');
+//     if(isLoading){
+//         loaderSection.classList.remove('d-none')
+//     }
+//     else{
+//         loaderSection.classList.add('d-none');
+//     }
+// }
 // get all data and pass all data using slice to show in the UI when click See All button
 const showAllDataTogether = async() => {
     const aiURL = `https://openapi.programming-hero.com/api/ai/tools`
     const res = await fetch(aiURL);
     const data = await res.json();
     showAI(data.data.tools)
+    const showbtndiv = document.getElementById('show-btn-div')
+    showbtndiv.classList.add('d-none')
   };
 
 loadAi()
